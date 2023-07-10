@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFaucet, faDatabase } from '@fortawesome/free-solid-svg-icons'
 
 export default function Home() {
   return (
@@ -36,6 +38,17 @@ export default function Home() {
           width={180}
           height={37}
           priority
+        />
+      </div>
+
+      <div>
+        <FontAwesomeIcon
+          icon={faFaucet}
+          style={{ fontSize: 100, color: "orange" }}
+        />
+        <FontAwesomeIcon
+          icon={faDatabase}
+          style={{ fontSize: 100, color: "orange" }}
         />
       </div>
 
