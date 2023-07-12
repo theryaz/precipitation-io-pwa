@@ -7,30 +7,27 @@ import { faMobileScreenButton, faStopwatch } from '@fortawesome/free-solid-svg-i
 export default function BarrelStats() {
 
     return (
-        <section id="barrelStats" className="w-full pt-4 pb-4">
+        <section id="barrelStats" className="w-full pt-4 pb-3">
             <div className="flex flex-row justify-between">
                 <Image
                     className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
                     src={WhiteBarrel}
                     alt="Rain Barrel"
-                    width={180}
-                    height={37}
-                // priority
+                    height={260}
                 />
                 <div id="stats" className="flex flex-col justify-center shrink-0 grow p-4">
                     <div className="stat flex pt-2 pb-2">
-                        <span className="font-bold mr-1 text-2xl">55 Gal</span>
+                        <span className="mr-1 text-2xl">55 Gal</span>
                     </div>
-                    <div className="stat flex pt-2 pb-2 items-center text-2xl font-bold">
+                    <div className="stat flex py-1 items-center text-xl">
                         <FontAwesomeIcon
                             icon={faMobileScreenButton}
                             className="fa-rotate-90 mr-1"
                             width={30}
-                        // style={{ fontSize: 88, color: "white" }}
                         />
                         14cm
                     </div>
-                    <div className="stat flex pt-2 pb-2 text-2xl font-bold items-center">
+                    <div className="stat flex pt-1 pb-1 text-xl items-center">
                         <FontAwesomeIcon
                             icon={faStopwatch}
                             className="mr-1"
