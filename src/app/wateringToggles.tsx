@@ -27,7 +27,7 @@ export default function WateringToggles() {
                 </div>
             ))
         }
-        <div className="text-lg text-slate-600 w-full flex-none text-center mt-4 mb-4">
+        <div className="text-lg text-slate-600 w-full flex-none text-center mt-2 mb-4">
             Touch to Power
             <span className="text-slate-800"> ON/OFF</span>
         </div>
