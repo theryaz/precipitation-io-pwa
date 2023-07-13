@@ -1,25 +1,17 @@
-import { MouseEventHandler } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
+import { faEllipsis, faPlus, faX } from '@fortawesome/free-solid-svg-icons'
 import { DateTime } from "luxon";
-import { WaterSource, WaterSourceIconMap } from './constants';
+import { WaterSource, WaterSourceIconMap, IrrigationRun } from './constants';
 
-
-
-interface IrrigationRun {
-    start: DateTime
-    minutes: number,
-    source: WaterSource
-}
 
 export default function SchedulesBrief() {
 
     const today = DateTime.now().set({ hour: 7 });
 
     const sampleSchedules: IrrigationRun[] = [
-        { start: today, minutes: 12, source: WaterSource.CITY },
-        { start: today.plus({ day: 1 }), minutes: 6, source: WaterSource.RAINBARREL },
-        { start: today.plus({ day: 2 }), minutes: 6, source: WaterSource.RAINBARREL },
+        { start: today, minutes: 12, source: WaterSource.CITY, fallbackEnabled: false },
+        { start: today.plus({ day: 1 }), minutes: 6, source: WaterSource.RAINBARREL, fallbackEnabled: true },
+        { start: today.plus({ day: 2 }), minutes: 6, source: WaterSource.RAINBARREL, fallbackEnabled: false },
     ]
 
     const renderTime = (runStart: DateTime) => {
@@ -31,12 +23,34 @@ export default function SchedulesBrief() {
             </div>
         )
     }
-    const renderIcon = (source: WaterSource) => {
+    const renderIcon = (source: WaterSource, fallbackEnabled: boolean) => {
         const iconColor = source === WaterSource.CITY ? "text-cityColor" : "text-pumpColor";
+        let icon = WaterSourceIconMap[source];
+        if (source == WaterSource.RAINBARREL) {
+            const subIcon = {
+                colorClass: (fallbackEnabled) ? "text-red-500" : "text-green-500",
+                iconName: (fallbackEnabled) ? faX : faPlus
+            }
+            return (
+                <span className="fa-stack h-auto w-10" style={{"verticalAlign": "top"}}>
+                    <FontAwesomeIcon
+                        className={`pl-2 ${iconColor}`}
+                        icon={icon}
+                        style={{ fontSize: 20 }}
+                    />
+                    <FontAwesomeIcon
+                        className={`${subIcon.colorClass} absolute`}
+                        icon={subIcon.iconName}
+                        style={{ fontSize: 10, bottom: 3 }}
+                    />
+                </span>
+            )
+        }
+        // source = city
         return (
             <FontAwesomeIcon
-                className={`pl-2 text-slate-400 ${iconColor}`}
-                icon={WaterSourceIconMap[source]}
+                className="text-cityColor w-10"
+                icon={icon}
                 height={60}
                 style={{ fontSize: 20 }}
             />
@@ -50,7 +64,7 @@ export default function SchedulesBrief() {
                 <div className="text-slate-500">next 3 days</div>
             </div>
             {
-                sampleSchedules.map(({start, minutes, source}, index) => {
+                sampleSchedules.map(({start, minutes, source, fallbackEnabled}, index) => {
                     return (
                         <div key={`run-${index}`}
                             className="w-full rounded-md group border-2 py-1 px-2 my-1 text-lg flex flex-row items-center
@@ -58,7 +72,7 @@ export default function SchedulesBrief() {
                             <div>{renderTime(start)}</div>
                             <div>
                                 {minutes}mins
-                                {renderIcon(source)}
+                                {renderIcon(source, fallbackEnabled)}
                             </div>
                         </div>
                     )
