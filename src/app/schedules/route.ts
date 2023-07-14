@@ -11,3 +11,9 @@ export async function GET() {
 
     return NextResponse.json({ "schedules": "YAY" })
 }
+
+export async function POST(request: Request) {
+    const data = await request.json()
+    const myResponse = { "youSent": data, "supercool": "ya"}
+    return NextResponse.json(myResponse, {status: 202});
+}
