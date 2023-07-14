@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import WhiteBarrel from "/public/WhiteBarrel.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMobileScreenButton, faStopwatch } from '@fortawesome/free-solid-svg-icons'
@@ -14,6 +14,7 @@ export default function BarrelStats() {
                     src={WhiteBarrel}
                     alt="Rain Barrel"
                     height={260}
+                    width={170}
                 />
                 <div id="stats" className="flex flex-col justify-center shrink-0 grow p-4">
                     <div className="stat flex pt-2 pb-2">
