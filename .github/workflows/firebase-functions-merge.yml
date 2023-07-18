@@ -16,6 +16,6 @@ jobs:
         run: echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRECIPITATION_IO }}' > $HOME/gcloud.json
       - name: 'Deploy'
         run: |
-          cd functions
+          cd functions && npm ci && npm run build
           export GOOGLE_APPLICATION_CREDENTIALS=$HOME/gcloud.json
           npm run deploy
