@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: cd functions && npm ci && npm run build
       - name: Create SA key
         run: echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRECIPITATION_IO }}' > $HOME/gcloud.json
       - name: 'Deploy'
