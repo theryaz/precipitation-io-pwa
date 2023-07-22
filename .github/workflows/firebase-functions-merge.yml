@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Create SA key
-        run: echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PRECIPITATION_IO }}' > $HOME/gcloud.json
+        run: echo '${{ secrets.FIREBASE_CI_TOKEN }}' > $HOME/gcloud.json
       - name: 'Deploy'
         run: |
           cd functions && npm ci && npm run build
