@@ -12,9 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Create SA key
-        run: echo $GCLOUD_FUCNTIONS_DEPLOY > $HOME/gcloud.json
+        run: echo '${{ secrets.GCLOUD_FUCNTIONS_DEPLOY }}' > $HOME/gcloud.json
       - name: 'Deploy'
         run: |
           cd functions && npm ci && npm run build
-          export GOOGLE_APPLICATION_CREDENTIALS=$GCLOUD_FUCNTIONS_DEPLOY
+          export GOOGLE_APPLICATION_CREDENTIALS=$HOME/gcloud.json
           npm run deploy
