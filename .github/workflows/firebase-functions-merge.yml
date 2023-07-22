@@ -16,5 +16,5 @@ jobs:
       - name: 'Deploy'
         run: |
           cd functions && npm ci && npm run build
-          export GOOGLE_APPLICATION_CREDENTIALS=$HOME/gcloud.json
+          export GOOGLE_APPLICATION_CREDENTIALS=$GCLOUD_FUCNTIONS_DEPLOY
           npm run deploy
