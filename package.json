@@ -18,6 +18,7 @@
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
     "autoprefixer": "10.4.14",
+    "classnames": "^2.5.1",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
     "luxon": "^3.3.0",

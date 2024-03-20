@@ -1,10 +1,22 @@
+import classnames from 'classnames'
 import Image from 'next/legacy/image'
 import WhiteBarrel from "/public/WhiteBarrel.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMobileScreenButton, faStopwatch } from '@fortawesome/free-solid-svg-icons'
+import { faBottleWater, faGlassWaterDroplet, faRulerHorizontal, faRulerVertical, faSpinner, faStopwatch, faWater } from '@fortawesome/free-solid-svg-icons'
 
+import { IrrigationSystemStatus } from '@/api/rainbarrel-api'
 
-export default function BarrelStats() {
+export type BarrelStatsProps = {
+    status: IrrigationSystemStatus,
+    metric?: boolean,
+}
+
+const litresToGallons = (l: number) => l * 0.264172
+
+export default function BarrelStats({ status, metric = false }: BarrelStatsProps) {
+
+    const total_capacity = Math.round(metric ? status.total_capacity_litres : litresToGallons(status.total_capacity_litres))
+    const current_volume = Math.round(metric ? status.current_volume_litres : litresToGallons(status.current_volume_litres))
 
     return (
         <section id="barrelStats" className="w-full pt-4 pb-3">
@@ -17,25 +29,39 @@ export default function BarrelStats() {
                     width={170}
                 />
                 <div id="stats" className="flex flex-col justify-center shrink-0 grow p-4">
-                    <div className="stat flex pt-2 pb-2">
-                        <span className="mr-1 text-2xl">55 Gal</span>
-                    </div>
-                    <div className="stat flex py-1 items-center text-xl">
+                    <div className="stat flex items-center pt-2 pb-2">
                         <FontAwesomeIcon
-                            icon={faMobileScreenButton}
-                            className="fa-rotate-90 mr-1"
-                            width={30}
-                        />
-                        14cm
-                    </div>
-                    <div className="stat flex pt-1 pb-1 text-xl items-center">
-                        <FontAwesomeIcon
-                            icon={faStopwatch}
+                            icon={faGlassWaterDroplet}
                             className="mr-1"
                             width={30}
                         />
-                        7mins
+                        <span className="mr-1 text-2xl">
+                            {current_volume}
+                            {/* Smaller text with lighter color */}
+                            <span className='text-xs text-stone-500'>/{total_capacity} {metric ? "litres" : "gallons"}</span>
+                        </span>
                     </div>
+                    <div className="stat flex py-1 items-center text-xl">
+                        <FontAwesomeIcon
+                            icon={faRulerVertical}
+                            className="mr-1"
+                            width={30}
+                        />
+                        {status.percent_full.toFixed(0)}
+                        <span className='text-xs text-stone-500'>%</span>
+                    </div>
+                    {status.pump_is_on ? (
+                        <div className="stat flex mt-2 pt-1 pb-1 text-xl items-center">
+                            <FontAwesomeIcon
+                                icon={faSpinner}
+                                className="mr-1 animate-spin"
+                                width={30}
+                            />
+                            <span className='text-xs text-stone-500'>
+                                Pump is on
+                            </span>
+                        </div>
+                    ) : null}
                 </div>
             </div>
         </section>
