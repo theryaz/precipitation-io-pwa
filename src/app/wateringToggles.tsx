@@ -22,9 +22,8 @@ export const WateringToggles = ({ waterSources }: WateringTogglesProps) => {
         <section id="waterToggles" className="flex items-center flex-row w-full justify-around max-w-md flex-wrap">
             {
                 waterSources.map(({ icon, title, colorClass, onClick, isOn }, index) => (
-                    <div>
+                    <div key={`source-btn-${index}`}>
                         <div
-                            key={`source-btn-${index}`}
                             className={`${colorClass} hover:border-blue-500 hover:border-solid group flex flex-col items-center justify-center rounded-md border-2 border-slate-300 w-36 p-8`}
                             onClick={onClick}
                         >
