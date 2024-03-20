@@ -25,7 +25,7 @@ export default function Home() {
     // },
     {
       icon: faArrowUpFromWaterPump,
-      title: "Rain Barrels",
+      title: "Rain Barrel Pump",
       colorClass: "bg-barrelColor",
       onClick: () => {
         togglePump()
@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-start p-4">
 
-      <BarrelStats />
+      <BarrelStats status={status} />
       <div className="divider w-full border-t-2 border-slate-300 py-2" />
       <WateringToggles waterSources={waterSources} />
       {/* <div className="divider w-full border-t-2 border-slate-300 pt-2 pb-3" />

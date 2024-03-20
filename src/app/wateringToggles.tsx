@@ -33,7 +33,6 @@ export const WateringToggles = ({ waterSources }: WateringTogglesProps) => {
                                 icon={icon}
                                 height={60}
                                 style={{ fontSize: 88, color: "white" }}
-                                className={`transition-transform duration-300 ease-in-out transform ${isOn ? "animate-bounce" : ""}`}
                             />
                         </div>
                         <div className='text-center mt-2'>
@@ -42,10 +41,6 @@ export const WateringToggles = ({ waterSources }: WateringTogglesProps) => {
                     </div>
                 ))
             }
-            <div className="text-lg text-slate-600 w-full flex-none text-center mt-2 mb-4">
-                Touch to Power
-                <span className="text-slate-800"> ON/OFF</span>
-            </div>
         </section>
     )
 }

@@ -29,5 +29,26 @@ export const useIrrigationApi = () => {
     fetchStatus();
   }, []);
 
+  // Auto-refresh status every 10 seconds. If the pump is running, then every 1 second.
+  const [intervalRef, setIntervalRef] = useState<NodeJS.Timer | null>(null);
+  useEffect(() => {
+    if (intervalRef) {
+      clearInterval(intervalRef);
+    }
+    if (status.pump_is_on) {
+      setIntervalRef(
+        setInterval(() => {
+          fetchStatus();
+        }, 1000)
+      );
+    } else if (!status.pump_is_on) {
+      setIntervalRef(
+        setInterval(() => {
+          fetchStatus();
+        }, 10000)
+      );
+    }
+  }, [status.pump_is_on]);
+
   return { status, togglePump };
 };
