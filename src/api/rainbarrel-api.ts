@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:8080";
+const API_URL = "http://192.168.132.122:8080";
+// const API_URL = "http://localhost:8080";
 
 export type IrrigationSystemStatus = {
   pump_is_on: boolean;
