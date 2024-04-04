@@ -15,7 +15,8 @@ export const AuthForm = () => {
       apiKey,
     })
     setApiKey(apiKey);
-    push("/")
+    console.log("Push /")
+    // push("/")
   };
 
   return (
