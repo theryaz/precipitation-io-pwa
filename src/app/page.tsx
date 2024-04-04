@@ -1,4 +1,5 @@
 'use client';
+import { redirect } from 'next/navigation';
 import BarrelStats from './barrelStats';
 import { WateringToggles, WaterSource } from './wateringToggles';
 import SchedulesBrief from './schedulesBrief';
@@ -10,9 +11,9 @@ import {
 import { IrrigationSystemStatus, getIrrigationSystemStatus, turnPumpOff, turnPumpOn } from '@/api/rainbarrel-api'
 import { useEffect, useState } from 'react';
 import { useIrrigationApi } from '@/hooks/useIrrigationApi';
+import { isAuthed } from '@/api/rainbarrel-api';
 
 export default function Home() {
-
   const { status, togglePump } = useIrrigationApi();
 
   const waterSources: WaterSource[] = [
@@ -34,15 +35,17 @@ export default function Home() {
     }
   ]
 
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-start p-4">
+  if (!isAuthed()) {
+    redirect('/auth');
+  }
 
+  return (
+    <div>
       <BarrelStats status={status} />
       <div className="divider w-full border-t-2 border-slate-300 py-2" />
       <WateringToggles waterSources={waterSources} />
       {/* <div className="divider w-full border-t-2 border-slate-300 pt-2 pb-3" />
       <SchedulesBrief /> */}
-
-    </main>
+    </div>
   )
 }
