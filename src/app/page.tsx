@@ -36,8 +36,7 @@ export default function Home() {
   ]
 
   if (!isAuthed()) {
-    // redirect('/auth');
-    console.log("Redirect to /auth")
+    redirect('/auth');
   }
 
   return (
