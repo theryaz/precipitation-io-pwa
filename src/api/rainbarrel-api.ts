@@ -6,10 +6,16 @@ export const isAuthed = (): boolean => {
 };
 
 export const setApiKey = (api_key: string) => {
+  if (typeof localStorage === "undefined") {
+    return;
+  }
   localStorage.setItem("API_KEY", api_key);
 };
 
 const getApiKey = (): string | null => {
+  if (typeof localStorage === "undefined") {
+    return null;
+  }
   return localStorage.getItem("API_KEY") || null;
 };
 

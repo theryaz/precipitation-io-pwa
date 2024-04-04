@@ -1,4 +1,5 @@
 'use client';
+import { redirect } from 'next/navigation';
 import BarrelStats from './barrelStats';
 import { WateringToggles, WaterSource } from './wateringToggles';
 import SchedulesBrief from './schedulesBrief';
@@ -13,7 +14,6 @@ import { useIrrigationApi } from '@/hooks/useIrrigationApi';
 import { isAuthed } from '@/api/rainbarrel-api';
 
 export default function Home() {
-
   const { status, togglePump } = useIrrigationApi();
 
   const waterSources: WaterSource[] = [
@@ -36,7 +36,7 @@ export default function Home() {
   ]
 
   if (!isAuthed()) {
-    window.location.href = '/auth';
+    redirect('/auth');
   }
 
   return (
